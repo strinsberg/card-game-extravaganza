@@ -5,7 +5,7 @@ LINKFLAGS= -lgtest
 
 SRC_DIR = src
 # Add a list of your source code files here
-SRCS = $(SRC_DIR)/Rummy*.cpp $(SRC_DIR)/Deck.cpp $(SRC_DIR)/Game.cpp $(SRC_DIR)/OldMaid*.cpp $(SRC_DIR)/Player.cpp
+SRCS = $(SRC_DIR)/Rummy*.cpp $(SRC_DIR)/Deck.cpp $(SRC_DIR)/Game.cpp $(SRC_DIR)/OldMaid*.cpp $(SRC_DIR)/Player.cpp $(SRC_DIR)/Card.cpp
 
 TEST_DIR = test
 
@@ -61,7 +61,7 @@ memcheck-test: $(PROGRAM_TEST)
 
 coverage: $(PROGRAM_TEST)
 	$(LCOV) --capture --gcov-tool $(GCOV) --directory . --output-file $(COVERAGE_RESULTS)
-	$(LCOV) --extract $(COVERAGE_RESULTS) "*/src/*" -o $(COVERAGE_RESULTS)
+	$(LCOV) --extract $(COVERAGE_RESULTS) "*/Destroy/src/*" -o $(COVERAGE_RESULTS)
 	genhtml $(COVERAGE_RESULTS) --output-directory $(COVERAGE_DIR)
 	rm -f *.gc*
 

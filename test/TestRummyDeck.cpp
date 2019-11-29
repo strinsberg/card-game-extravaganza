@@ -57,13 +57,13 @@ TEST(TestRummyDeck, flip_discard) {
   Card *c = rd.topDiscard();
   EXPECT_EQ(Card::Rank::KING, c->rank);
   EXPECT_EQ(Card::Suit::HEART, c->suit);
-  
+
   rd.flipDiscard();
 
   Card *c2 = rd.getCard();
   EXPECT_EQ(Card::Rank::ACE, c2->rank);
   EXPECT_EQ(Card::Suit::CLUB, c2->suit);
-  
+
   delete c2;
 }
 
