@@ -9,19 +9,28 @@ RummyDeck::RummyDeck() : Deck() {}
 RummyDeck::~RummyDeck() {}
 
 Card* RummyDeck::topDiscard() {
-  return discard.back();    
+  return discard.back();
 }
 
 void RummyDeck::addDiscard(Card* c) {
-  discard.push_back(c);    
+  discard.push_back(c);
 }
 
-Card* RummyDeck::getDiscard() {}
+Card* RummyDeck::takeDiscardTop() {
+  if (discard.empty())
+    return nullptr;
 
-unsigned int RummyDeck::discardSize() {}
+  Card* c = topDiscard();
+  discard.erase(discard.end() - 1);
+  return c;
+}
+
+unsigned int RummyDeck::discardSize() {
+  return discard.size();
+}
 
 void RummyDeck::flipDiscard() {}
 
 void RummyDeck::discardDeckTop() {
-  addDiscard(getCard());    
+  addDiscard(getCard());
 }

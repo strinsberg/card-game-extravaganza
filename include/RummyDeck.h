@@ -17,7 +17,7 @@ class RummyDeck : public Deck {
  public:
   RummyDeck();
   virtual ~RummyDeck();
-  
+
   /**
    * Get a pointer to the top card of the discard.
    * Does not remove the card.
@@ -25,7 +25,7 @@ class RummyDeck : public Deck {
    * @return the top card of the discard pile.
    */
   virtual Card* topDiscard();
-  
+
   /**
    * Add a card to the top of the discard pile.
    * Transfers ownership to the deck.
@@ -33,14 +33,14 @@ class RummyDeck : public Deck {
    * @param c The card to add.
    */
   virtual void addDiscard(Card* c);
-  
+
   /**
    * Takes the top card from the discard pile.
    * Transfers ownership to the caller.
    *
    * @return the top card of the discard pile.
    */
-  virtual Card* getDiscard();
+  virtual Card* takeDiscardTop();
 
   /**
    * Returns the number of cards in the discard pile.
@@ -56,7 +56,7 @@ class RummyDeck : public Deck {
    * @precondition Deck must be empty.
    */
   virtual void flipDiscard();
-  
+
   /**
    * Flips a card from the top of the deck and puts it on top of the discard.
    */
