@@ -16,4 +16,16 @@ class game_init_error: public std::runtime_error {
     }
 };
 
+/**
+* Exception when a general pre-condition is not met.
+*/
+class unmet_precondition_error: public std::runtime_error {
+ public:
+    /**
+    * @param errMessage An error message.
+    */
+    explicit unmet_precondition_error(const char* errMessage) :
+        std::runtime_error(errMessage) {
+    }
+};
 #endif // EXCEPTIONS_H_INCLUDED

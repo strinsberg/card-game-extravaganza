@@ -2,6 +2,7 @@
 #include "RummyDeck.h"
 #include "Deck.h"
 #include "Card.h"
+#include "Exceptions.h"
 
 
 RummyDeck::RummyDeck() : Deck() {}
@@ -29,7 +30,13 @@ unsigned int RummyDeck::discardSize() {
   return discard.size();
 }
 
-void RummyDeck::flipDiscard() {}
+void RummyDeck::flipDiscard() {
+  if (!deck.empty())
+    throw unmet_precondition_error("The deck still has cards in it.");
+
+  while (!discard.empty())
+    deck.insert(deck.begin(), takeDiscardTop());
+}
 
 void RummyDeck::discardDeckTop() {
   addDiscard(getCard());
