@@ -5,7 +5,7 @@ LINKFLAGS= -lgtest
 
 SRC_DIR = src
 # Add a list of your source code files here
-SRCS = $(SRC_DIR)/Deck.cpp $(SRC_DIR)/Game.cpp $(SRC_DIR)/OldMaid*.cpp $(SRC_DIR)/Player.cpp
+SRCS = $(SRC_DIR)/Rummy*.cpp $(SRC_DIR)/Deck.cpp $(SRC_DIR)/Game.cpp $(SRC_DIR)/OldMaid*.cpp $(SRC_DIR)/Player.cpp
 
 TEST_DIR = test
 

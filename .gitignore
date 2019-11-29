@@ -1,0 +1,6 @@
+*.swp
+*.gcno
+*.gcda
+
+cardGame
+testGame
