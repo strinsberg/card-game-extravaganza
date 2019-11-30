@@ -97,7 +97,8 @@ TEST(TestRummyTable, addCard_throws_run) {
   meld.emplace_back(c2);
   meld.emplace_back(c3);
 
-  Card* c4 = new Card(Card::Suit::HEART, Card::Rank::FOUR);
+  Card* c4 = new Card(Card::Suit::HEART, Card::Rank::SIX);
+  Card* c5 = new Card(Card::Suit::SPADE, Card::Rank::FOUR);
   rt.addMeld(meld);
   EXPECT_THROW(rt.addCard(c4), unmet_precondition_error);
   EXPECT_EQ(3, rt.getMelds().at(0).size());
@@ -105,4 +106,5 @@ TEST(TestRummyTable, addCard_throws_run) {
   for (auto & c : meld)
       delete c;
   delete c4;
+  delete c5;
 }

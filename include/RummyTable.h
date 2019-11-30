@@ -51,6 +51,8 @@ class RummyTable {
 
  protected:
   std::vector<std::vector<Card*>> table;
+
+  bool isSet(const std::vector<Card*>& meld);
 };
 
 #endif
