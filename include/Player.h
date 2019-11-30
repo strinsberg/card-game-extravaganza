@@ -36,6 +36,20 @@ class Player {
     */
     const std::string name;
 
+    /**
+     * Returns the players score.
+     *
+     * @return The players score.
+     */
+    int getScore() {return score;}
+
+    /**
+     * Set the players score.
+     *
+     * @param The new score.
+     */
+    void setScore(int s) {score = s;}
+
  private:
     std::list<Card*> hand;
     unsigned int score = 0;
