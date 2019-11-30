@@ -39,7 +39,14 @@ const std::vector<std::vector<Card*>>& RummyTable::getMelds() {
 }
 
 std::vector<Card*> RummyTable::takeAllCards() {
-  return std::vector<Card*>();
+  std::vector<Card*> cards;
+  for (auto & v : table) {
+    for (auto c : v) {
+      cards.push_back(c);
+    }
+  }
+  table.clear();
+  return cards;
 }
 
 bool RummyTable::isSet(const std::vector<Card*>& meld) {

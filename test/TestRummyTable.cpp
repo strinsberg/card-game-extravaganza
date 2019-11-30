@@ -113,3 +113,40 @@ TEST(TestRummyTable, addCard_throws_run) {
   delete c4;
   delete c5;
 }
+
+TEST(TestRummyTable, takeAllCards) {
+  RummyTable rt;
+
+  std::vector<Card*> meld;
+  Card* c = new Card(Card::Suit::HEART, Card::Rank::ACE);
+  Card* c2 = new Card(Card::Suit::HEART, Card::Rank::TWO);
+  Card* c3 = new Card(Card::Suit::HEART, Card::Rank::THREE);
+  meld.emplace_back(c);
+  meld.emplace_back(c2);
+  meld.emplace_back(c3);
+
+  std::vector<Card*> meld2;
+  Card* c4 = new Card(Card::Suit::DIAMOND, Card::Rank::ACE);
+  Card* c5 = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  Card* c6 = new Card(Card::Suit::CLUB, Card::Rank::ACE);
+  meld2.emplace_back(c4);
+  meld2.emplace_back(c5);
+  meld2.emplace_back(c6);
+
+  rt.addMeld(meld);
+  rt.addMeld(meld2);
+  std::vector<Card*> cards = rt.takeAllCards();
+
+  EXPECT_EQ(c, cards.at(0));
+  EXPECT_EQ(c2, cards.at(1));
+  EXPECT_EQ(c3, cards.at(2));
+  EXPECT_EQ(c4, cards.at(3));
+  EXPECT_EQ(c5, cards.at(4));
+  EXPECT_EQ(c6, cards.at(5));
+
+  EXPECT_EQ(6, cards.size());
+  EXPECT_EQ(0, rt.getMelds().size());
+
+  for (auto & c : cards)
+      delete c;
+}
