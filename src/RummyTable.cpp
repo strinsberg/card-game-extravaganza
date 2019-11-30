@@ -1,3 +1,4 @@
+#include <vector>
 #include "RummyTable.h"
 #include "Exceptions.h"
 
