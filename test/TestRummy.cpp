@@ -67,5 +67,83 @@ TEST(RummyTests, isOver_false) {
   EXPECT_FALSE(r.isOver());
 }
 
-TEST(RummyTests, dealCards) {
+TEST(RummyTests, dealCards_two_players) {
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+
+  Player* p = new Player("Stan");
+  Player* p2 = new Player("Betty");
+  r.addPlayer(p);
+  r.addPlayer(p2);
+
+  EXPECT_CALL(*mDeck, getCard())
+  .Times(20)
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::ACE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::TWO)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::THREE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::FOUR)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::FIVE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::SIX)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::SEVEN)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::ACE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::TWO)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::THREE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::FOUR)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::FIVE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::SIX)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::SEVEN)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::EIGHT)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::NINE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::TEN)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::JACK)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::QUEEN)))
+  .WillOnce(testing::Return(new Card(Card::Suit::CLUB, Card::Rank::KING)));
+
+  r.dealCards(r.getPlayers());
+  EXPECT_EQ(10, p->getHand()->size());
+  EXPECT_EQ(10, p2->getHand()->size());
+}
+
+
+TEST(RummyTests, dealCards_three_players) {
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+
+  Player* p = new Player("Stan");
+  Player* p2 = new Player("Betty");
+  Player* p3 = new Player("Betty");
+  r.addPlayer(p);
+  r.addPlayer(p2);
+  r.addPlayer(p3);
+
+  EXPECT_CALL(*mDeck, getCard())
+  .Times(21)
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::ACE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::TWO)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::THREE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::FOUR)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::FIVE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::SIX)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::SEVEN)))
+  .WillOnce(testing::Return(new Card(Card::Suit::SPADE, Card::Rank::EIGHT)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::ACE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::TWO)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::THREE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::FOUR)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::FIVE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::SIX)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::SEVEN)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::EIGHT)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::NINE)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::TEN)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::JACK)))
+  .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::QUEEN)))
+  .WillOnce(testing::Return(new Card(Card::Suit::CLUB, Card::Rank::KING)));
+
+  r.dealCards(r.getPlayers());
+  EXPECT_EQ(7, p->getHand()->size());
+  EXPECT_EQ(7, p2->getHand()->size());
+  EXPECT_EQ(7, p3->getHand()->size());
 }

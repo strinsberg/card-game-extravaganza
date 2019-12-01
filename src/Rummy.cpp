@@ -24,6 +24,15 @@ int Rummy::countPoints(Player* p) {
 }
 
 void Rummy::dealCards(std::vector<Player*> p) {
+    unsigned int playerNum = 0;
+    unsigned int numPlayers = p.size();
+    unsigned int numCards = numPlayers == 2 ? 10 : 7;
+
+    for (unsigned int i = 0; i < numPlayers * numCards; i++) {
+        Player* p = players.at(playerNum);
+        p->addCard(deck->getCard());
+        playerNum = (++playerNum) % numPlayers;
+    }
 }
 
 void Rummy::beforeTurn(unsigned int playerNum,
