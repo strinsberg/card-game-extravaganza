@@ -8,6 +8,12 @@
 
 RummyUI::RummyUI() {}
 RummyUI::~RummyUI() {}
+void RummyUI::takeTurn(Player* p) {}
+void RummyUI::displayTable(RummyTable* table) {}
+void RummyUI::displayHand(std::list<Card*>* hand) {}
+bool RummyUI::drawFromDeck() {}
+void RummyUI::playMeld(std::list<Card*>* hand) {}
+void RummyUI::layOff(std::list<Card*>* hand) {}
 
 unsigned int RummyUI::requestCard(Player* player,
                                std::list<Card*>* hand) {

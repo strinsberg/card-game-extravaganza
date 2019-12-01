@@ -7,7 +7,7 @@
 #include "Card.h"
 #include "RummyDeck.h"
 #include "RummyTable.h"
-#include "GameUI.h"
+#include "RummyUI.h"
 
 
 /**
@@ -24,7 +24,7 @@ class Rummy : public Game {
    * @param ui The UI for the game.
    * @param deck The deck for the game.
    */
-  Rummy(GameUI* ui, RummyDeck* deck);
+  Rummy(RummyUI* ui, RummyDeck* deck);
   virtual ~Rummy();
 
   /**
@@ -44,7 +44,8 @@ class Rummy : public Game {
   virtual bool isOver();
 
  private:
-  RummyDeck* rummyDeck;
+  RummyDeck* rummyDeck; // Pointers to call rummy specific methods
+  RummyUI* rummyUI;     // This memory is freed in parent Game class
   RummyTable table;
 };
 

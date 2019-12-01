@@ -1,12 +1,13 @@
 #include <vector>
 #include "Rummy.h"
 #include "RummyDeck.h"
-#include "GameUI.h"
+#include "RummyUI.h"
 #include "Card.h"
 #include "Player.h"
 
 
-Rummy::Rummy(GameUI* ui, RummyDeck* deck) : Game(ui, deck), rummyDeck(deck) {}
+Rummy::Rummy(RummyUI* ui, RummyDeck* deck) : Game(ui, deck), rummyDeck(deck),
+  rummyUI(ui) {}
 
 Rummy::~Rummy() {}
 

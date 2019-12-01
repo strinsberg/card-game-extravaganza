@@ -3,11 +3,11 @@
 #include "Rummy.h"
 #include "Card.h"
 #include "Player.h"
-#include "MockUI.h"
+#include "MockRummyUI.h"
 #include "MockRummyDeck.h"
 
 TEST(RummyTests, countPoints) {
-  MockUI* mUI = new MockUI();
+  MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
 
@@ -36,7 +36,7 @@ TEST(RummyTests, afterTurn) {
 }
 
 TEST(RummyTests, turnOver) {
-  MockUI* mUI = new MockUI();
+  MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
 
@@ -44,7 +44,7 @@ TEST(RummyTests, turnOver) {
 }
 
 TEST(RummyTests, isOver_true) {
-  MockUI* mUI = new MockUI();
+  MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
 
@@ -60,7 +60,7 @@ TEST(RummyTests, isOver_true) {
 }
 
 TEST(RummyTests, isOver_false) {
-  MockUI* mUI = new MockUI();
+  MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
 
