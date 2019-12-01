@@ -16,7 +16,7 @@ class MockRummyDeck : public RummyDeck {
   MOCK_METHOD0(discardSize, unsigned int());
   MOCK_METHOD0(flipDiscard, void());
   MOCK_METHOD0(discardDeckTop, void());
-  
+
   MOCK_METHOD0(getCard, Card*());
   MOCK_METHOD0(size, unsigned int());
   MOCK_METHOD0(shuffle, void());

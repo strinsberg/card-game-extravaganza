@@ -6,13 +6,20 @@
 #include "Player.h"
 
 
-Rummy::Rummy(GameUI* ui, RummyDeck* deck) : Game(ui, deck), rummyDeck(deck) {
-}
+Rummy::Rummy(GameUI* ui, RummyDeck* deck) : Game(ui, deck), rummyDeck(deck) {}
 
-Rummy::~Rummy() {
-}
+Rummy::~Rummy() {}
 
-int Rummy::countPoints(Player*) {
+int Rummy::countPoints(Player* p) {
+  int sum = 0;
+  for (auto c : *(p->getHand())) {
+    int rank = static_cast<int>(c->rank);
+    if (rank > 9)
+      sum += 10;
+    else
+      sum += rank + 1;
+  }
+  return sum;
 }
 
 void Rummy::dealCards(std::vector<Player*> p) {

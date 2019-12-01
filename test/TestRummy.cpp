@@ -30,21 +30,16 @@ TEST(RummyTests, countPoints) {
 }
 
 TEST(RummyTests, beforeTurn) {
-
 }
 
 TEST(RummyTests, afterTurn) {
-
 }
 
 TEST(RummyTests, turnOver) {
-
 }
 
 TEST(RummyTests, isOver) {
-
 }
 
 TEST(RummyTests, dealCards) {
-
 }
