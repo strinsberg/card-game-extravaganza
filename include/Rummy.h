@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Card.h"
 #include "RummyDeck.h"
+#include "RummyTable.h"
 #include "GameUI.h"
 
 
@@ -34,7 +35,7 @@ class Rummy : Game {
    */
   virtual int countPoints(Player*);
 
-  virtual dealCards();
+  virtual void dealCards(std::vector<Player*> p);
   virtual void beforeTurn(unsigned int playerNum,
                           unsigned int numPlayers);
   virtual void afterTurn(Player* currentPlayer, std::vector<Player*>* players,
