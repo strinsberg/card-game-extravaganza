@@ -3,8 +3,8 @@
 #include <list>
 
 Player::~Player() {
-    for (unsigned int i = 0; i < hand.size(); ++i)
-        hand.pop_front();
+    for (auto c : hand)
+        delete c;
     hand.clear();
 }
 
