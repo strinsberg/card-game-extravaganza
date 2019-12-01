@@ -16,7 +16,7 @@
  * @author Steven Deutekom
  * @date nov 29 2019
  */
-class Rummy : Game {
+class Rummy : public Game {
  public:
   /**
    * Creates the Rummy object with a given ui and deck.

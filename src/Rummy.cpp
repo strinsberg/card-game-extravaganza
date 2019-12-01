@@ -34,7 +34,9 @@ void Rummy::afterTurn(Player* currentPlayer, std::vector<Player*>* players,
 }
 
 bool Rummy::turnOver() {
+  return true;
 }
 
 bool Rummy::isOver() {
+  return playersGoneOut.size() > 0;
 }

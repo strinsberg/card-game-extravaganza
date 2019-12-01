@@ -36,9 +36,35 @@ TEST(RummyTests, afterTurn) {
 }
 
 TEST(RummyTests, turnOver) {
+  MockUI* mUI = new MockUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+
+  EXPECT_TRUE(r.turnOver());
 }
 
-TEST(RummyTests, isOver) {
+TEST(RummyTests, isOver_true) {
+  MockUI* mUI = new MockUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+
+  Player* p = new Player("Francis");
+
+  EXPECT_CALL(*mUI, outOfGame(p))
+  .Times(1);
+
+  r.addPlayer(p);
+  r.checkIfPlayerOut();
+
+  EXPECT_TRUE(r.isOver());
+}
+
+TEST(RummyTests, isOver_false) {
+  MockUI* mUI = new MockUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+
+  EXPECT_FALSE(r.isOver());
 }
 
 TEST(RummyTests, dealCards) {
