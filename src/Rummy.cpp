@@ -19,11 +19,11 @@ void Rummy::dealCards(std::vector<Player*> p) {
 }
 
 void Rummy::beforeTurn(unsigned int playerNum,
-                      unsigned int numPlayers) {
+                       unsigned int numPlayers) {
 }
 
 void Rummy::afterTurn(Player* currentPlayer, std::vector<Player*>* players,
-                     Card* played) {
+                      Card* played) {
 }
 
 bool Rummy::turnOver() {

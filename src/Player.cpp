@@ -4,7 +4,7 @@
 
 Player::~Player() {
     for (unsigned int i = 0; i < hand.size(); ++i)
-        delete hand.front();
+        hand.pop_front();
     hand.clear();
 }
 
