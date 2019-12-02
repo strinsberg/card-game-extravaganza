@@ -8,7 +8,10 @@ RummyTable::RummyTable() {}
 RummyTable::~RummyTable() {}
 
 void RummyTable::addMeld(std::vector<Card*> meld) {
+  if (validateMeld(meld))
     table.push_back(meld);
+  else
+    throw unmet_precondition_error("Meld is not valid");
 }
 
 void RummyTable::addCard(Card* c) {
@@ -53,4 +56,8 @@ bool RummyTable::isSet(const std::vector<Card*>& meld) {
   if (meld.at(0)->rank == meld.at(1)->rank)
     return true;
   return false;
+}
+
+bool RummyTable::validateMeld(std::vector<Card*> meld) {
+  return true;
 }

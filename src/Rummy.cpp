@@ -4,12 +4,15 @@
 #include "RummyUI.h"
 #include "Card.h"
 #include "Player.h"
+#include "Exceptions.h"
 
 
 Rummy::Rummy(RummyUI* ui, RummyDeck* deck) : Game(ui, deck), rummyDeck(deck),
-  rummyUI(ui) {}
+  rummyUI(ui), table(new RummyTable()) {}
 
-Rummy::~Rummy() {}
+Rummy::~Rummy() {
+  delete table;
+}
 
 int Rummy::countPoints(Player* p) {
   int sum = 0;
@@ -73,25 +76,26 @@ void Rummy::pickupCard(Player* p) {
 }
 
 void Rummy::playMelds(Player* p) {
-//   bool melds = true;
-//   while (melds) {
-//     std::vector<int> meldIdxs = rummyUI->playMeld(hand);
-//     if (meldIdxs.size()) {
-//       std::vector<card> meld;
-//       // validate set or run before removeing cards
-//       for (auto i : meldIdxs)
-//         meld.push_back(player->getCard(i - 1));
-//       if (validateMeld(meld)) {
-//         for (auto c : meld)
-//           player->getHand()->remove(c);
-//         // redisplay hand? table? say play succeeded?
-//       } else {
-//         rummyUI->playFailed();
-//       }
-//     } else {
-//       melds = false;
-//     }
-//   }
+  bool melds = true;
+  while (melds) {
+    std::vector<int> meldIdxs = rummyUI->playMeld(p->getHand());
+    if (meldIdxs.size()) {
+      std::vector<Card*> meld;
+      // validate set or run before removeing cards
+      for (auto i : meldIdxs)
+        meld.push_back(p->getCard(i - 1));
+      try {
+        table->addMeld(meld);
+        for (auto c : meld)
+          p->getHand()->remove(c);
+        // redisplay hand? table? say play succeeded?
+      } catch (unmet_precondition_error & e) {
+        rummyUI->playFailed();
+      }
+    } else {
+      melds = false;
+    }
+  }
 }
 
 void Rummy::layOff(Player* p) {

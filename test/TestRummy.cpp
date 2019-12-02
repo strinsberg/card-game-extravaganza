@@ -164,7 +164,7 @@ TEST(RummyTests, layOff) {
   EXPECT_CALL(*mUI, playFailed())
   .Times(1);
 
-  r.playMelds(p);
+  r.layOff(p);
   EXPECT_EQ(3, p->getHand()->size());
 }
 
