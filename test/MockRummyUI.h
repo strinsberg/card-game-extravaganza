@@ -11,9 +11,9 @@ class MockRummyUI : public RummyUI {
     MOCK_METHOD1(takeTurn, void(Player*));
     MOCK_METHOD1(displayTable, void(RummyTable*));
     MOCK_METHOD1(displayHand, void(std::list<Card*>*));
-    MOCK_METHOD0(drawFromDeck, bool());
-    MOCK_METHOD1(playMelds, void(std::list<Card*>*));
-    MOCK_METHOD1(layOff, void(std::list<Card*>*));
+    MOCK_METHOD1(drawFromDeck, int(RummyDeck*));
+    MOCK_METHOD1(playMelds, std::vector<Card*>(std::list<Card*>*));
+    MOCK_METHOD1(layOff, int(std::list<Card*>*));
 
     MOCK_METHOD2(requestCard, unsigned int(Player*, std::list<Card*>*));
     MOCK_METHOD0(playFailed, void());

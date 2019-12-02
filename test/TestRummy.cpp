@@ -30,9 +30,110 @@ TEST(RummyTests, countPoints) {
 }
 
 TEST(RummyTests, beforeTurn) {
+  // setup rummy
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+  
+  Player* p = new Player("Steve");
+  r.addPlayer(p);
+
+  EXPECT_CALL(*mUI, takeTurn(p))
+  .Times(1);
+
+  EXPECT_CALL(*mUI, displayTable(testing::_))
+  .Times(1);
+
+  EXPECT_CALL(*mUI, displayHand(p->getHand()))
+  .Times(1);
+
+  EXPECT_CALL(*mUI, playMelds(p->getHand()))
+  .Times(1);
 }
 
-TEST(RummyTests, afterTurn) {
+TEST(RummyTests, displayTurn) {
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+  
+  Player* p = new Player("Steve");
+  r.addPlayer(p);
+
+  EXPECT_CALL(*mUI, takeTurn(p))
+  .Times(1);
+
+  EXPECT_CALL(*mUI, displayTable(testing::_))
+  .Times(1);
+
+  r.displayTurnInfo(p);
+}
+
+TEST(RummyTests, displayHand) {
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+  
+  Player* p = new Player("Steve");
+  r.addPlayer(p);
+
+  EXPECT_CALL(*mUI, displayHand(p->getHand()))
+  .Times(1);
+
+  r.displayHand(p);
+}
+
+TEST(RummyTests, pickupCard) {
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+  
+  Player* p = new Player("Steve");
+  r.addPlayer(p);
+
+  Card* c = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+
+  EXPECT_CALL(*mUI, drawFromDeck(mDeck))
+  .Times(1)
+  .WillOnce(testing::Return(1))
+  .WillOnce(testing::Return(2))
+  .WillOnce(testing::Return(0));
+
+  EXPECT_CALL(*mDeck, getCard())
+  .Times(2)
+  .WillRepeatedly(testing::Return(c));
+
+  EXPECT_CALL(*mDeck, takeDiscardTop())
+  .Times(1)
+  .WillOnce(testing::Return(c));
+
+  EXPECT_CALL(*mDeck, flipDiscard())
+  .Times(1);
+
+  r.pickupCard(p);
+  r.pickupCard(p);
+  r.pickupCard(p);
+
+  EXPECT_EQ(3, p->getHand()->size());
+}
+
+TEST(RummyTests, playMeld) {
+  // setup rummy
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+  
+  Player* p = new Player("Steve");
+  r.addPlayer(p);
+}
+
+TEST(RummyTests, layOff) {
+  // setup rummy
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+  
+  Player* p = new Player("Steve");
+  r.addPlayer(p);
 }
 
 TEST(RummyTests, turnOver) {

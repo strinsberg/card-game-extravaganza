@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Card.h"
 #include "RummyTable.h"
+#include "RummyDeck.h"
 
 
 /**
@@ -24,9 +25,9 @@ class RummyUI : public GameUI {
   virtual void takeTurn(Player* p);
   virtual void displayTable(RummyTable* table);
   virtual void displayHand(std::list<Card*>* hand);
-  virtual bool drawFromDeck();
-  virtual void playMeld(std::list<Card*>* hand);
-  virtual void layOff(std::list<Card*>* hand);
+  virtual int drawFromDeck(RummyDeck* deck);
+  virtual std::vector<int> playMeld(std::list<Card*>* hand);
+  virtual int layOff(std::list<Card*>* hand);
 
   virtual unsigned int requestCard(Player* player,
                                    std::list<Card*>* hand);

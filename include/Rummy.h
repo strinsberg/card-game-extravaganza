@@ -35,6 +35,12 @@ class Rummy : public Game {
    */
   virtual int countPoints(Player*);
 
+  virtual void displayTurnInfo(Player* p);
+  virtual void displayHand(Player* p);
+  virtual void pickupCard(Player* p);
+  virtual void playMelds(Player* p);
+  virtual void layOff(Player* p);
+
   virtual void dealCards(std::vector<Player*> p);
   virtual void beforeTurn(unsigned int playerNum,
                           unsigned int numPlayers);
