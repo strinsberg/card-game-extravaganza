@@ -99,23 +99,23 @@ void Rummy::playMelds(Player* p) {
 }
 
 void Rummy::layOff(Player* p) {
-//   bool layoff = true;
-//   while (layoff) {
-//     int idx = rummyUI->layOff(hand);
-//     if (idx > 0) {
-//       // get the card and check it and remove it
-//       Card* card = player->getCard(idx);
-//       try {
-//         rummyTable->addCard(card);
-//         hand->remove(card);
-//         // say anything??
-//       } catch (unmet_precondition_error& e) {
-//         rummyUI->playFailed();
-//       }
-//     } else {
-//       layoff = false;
-//     }
-//   }
+  bool layoff = true;
+  while (layoff) {
+    int idx = rummyUI->layOff(p->getHand());
+    if (idx > 0) {
+      // get the card and check it and remove it
+      Card* card = p->getCard(idx);
+      try {
+        table->addCard(card);
+        p->getHand()->remove(card);
+        // say anything??
+      } catch (unmet_precondition_error& e) {
+        rummyUI->playFailed();
+      }
+    } else {
+      layoff = false;
+    }
+  }
 }
 
 void Rummy::sortHand(std::list<Card*>* hand) {
