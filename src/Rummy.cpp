@@ -52,8 +52,8 @@ void Rummy::displayTurnInfo(Player* p) {
 }
 
 void Rummy::displayHand(Player* p) {
-//   sortHand(hand);
-//   rummyUI->displayHand(hand);
+ sortHand(p->getHand());
+ rummyUI->displayHand(p->getHand());
 }
 
 void Rummy::pickupCard(Player* p) {
@@ -112,6 +112,10 @@ void Rummy::layOff(Player* p) {
 //       layoff = false;
 //     }
 //   }
+}
+
+void Rummy::sortHand(std::list<Card*>* hand) {
+
 }
 
 

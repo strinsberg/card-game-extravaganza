@@ -41,6 +41,8 @@ class Rummy : public Game {
   virtual void playMelds(Player* p);
   virtual void layOff(Player* p);
 
+  void sortHand(std::list<Card*>* hand);
+
   virtual void dealCards(std::vector<Player*> p);
   virtual void beforeTurn(unsigned int playerNum,
                           unsigned int numPlayers);
