@@ -91,20 +91,23 @@ TEST(RummyTests, pickupCard) {
   r.addPlayer(p);
 
   Card* c = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  Card* c2 = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  Card* c3 = new Card(Card::Suit::SPADE, Card::Rank::ACE);
 
   EXPECT_CALL(*mUI, drawFromDeck(mDeck))
-  .Times(1)
+  .Times(3)
   .WillOnce(testing::Return(1))
   .WillOnce(testing::Return(2))
   .WillOnce(testing::Return(0));
 
   EXPECT_CALL(*mDeck, getCard())
   .Times(2)
-  .WillRepeatedly(testing::Return(c));
+  .WillOnce(testing::Return(c))
+  .WillOnce(testing::Return(c2));
 
   EXPECT_CALL(*mDeck, takeDiscardTop())
   .Times(1)
-  .WillOnce(testing::Return(c));
+  .WillOnce(testing::Return(c3));
 
   EXPECT_CALL(*mDeck, flipDiscard())
   .Times(1);

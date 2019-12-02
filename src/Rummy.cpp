@@ -57,19 +57,19 @@ void Rummy::displayHand(Player* p) {
 }
 
 void Rummy::pickupCard(Player* p) {
-//   int pickup = rummyUI->drawFromDeck(rummyDeck);
-//   
-//   Card* c;
-//   if (pickup == 1)
-//     c = rummyDeck->getCard();
-//   else if (pickup == 2)
-//     c = rummyDeck->takeDiscardTop();
-//   else {
-//     rummyDeck->flipDiscard();
-//     c = rummyDeck->getCard();
-//   }
-//   
-//   player->addCard(c);
+  int pickup = rummyUI->drawFromDeck(rummyDeck);
+ 
+  Card* c;
+  if (pickup == 1)
+    c = rummyDeck->getCard();
+  else if (pickup == 2)
+    c = rummyDeck->takeDiscardTop();
+  else {
+    rummyDeck->flipDiscard();
+    c = rummyDeck->getCard();
+  }
+ 
+  p->addCard(c);
 }
 
 void Rummy::playMelds(Player* p) {
