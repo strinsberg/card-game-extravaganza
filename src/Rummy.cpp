@@ -47,8 +47,8 @@ void Rummy::beforeTurn(unsigned int playerNum,
 }
 
 void Rummy::displayTurnInfo(Player* p) {
-//    rummyUI->takeTurn(player);
-//    rummyUI->displayTable();
+  rummyUI->takeTurn(p);
+  rummyUI->displayTable(table);
 }
 
 void Rummy::displayHand(Player* p) {
@@ -76,17 +76,18 @@ void Rummy::playMelds(Player* p) {
 //   bool melds = true;
 //   while (melds) {
 //     std::vector<int> meldIdxs = rummyUI->playMeld(hand);
-//   if (meldIdxs.size()) {
+//     if (meldIdxs.size()) {
 //       std::vector<card> meld;
 //       // validate set or run before removeing cards
 //       for (auto i : meldIdxs)
-//         meld.push_back(player->getCard(i));
-//         if (validateMeld(meld)) {
-//           // remove cards from hand
-//           // redisplay hand? table? say play succeeded?
-//         } else {
-//           rummyUI->playFailed();
-//         }
+//         meld.push_back(player->getCard(i - 1));
+//       if (validateMeld(meld)) {
+//         for (auto c : meld)
+//           player->getHand()->remove(c);
+//         // redisplay hand? table? say play succeeded?
+//       } else {
+//         rummyUI->playFailed();
+//       }
 //     } else {
 //       melds = false;
 //     }

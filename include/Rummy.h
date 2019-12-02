@@ -52,7 +52,7 @@ class Rummy : public Game {
  private:
   RummyDeck* rummyDeck; // Pointers to call rummy specific methods
   RummyUI* rummyUI;     // This memory is freed in parent Game class
-  RummyTable table;
+  RummyTable* table;
 };
 
 #endif
