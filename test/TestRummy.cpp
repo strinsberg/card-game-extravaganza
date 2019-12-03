@@ -249,6 +249,8 @@ TEST(RummyTests, afterTurn) {
   r.afterTurn(p, &players, c);
 
   EXPECT_EQ(0, p->getHand()->size());
+
+  delete c;
 }
 
 TEST(RummyTests, isOver_true) {
