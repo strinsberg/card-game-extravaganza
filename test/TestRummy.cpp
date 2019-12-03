@@ -365,6 +365,8 @@ TEST(TestRummy, sortHand) {
   hand.push_back(new Card(Card::Suit::SPADE, Card::Rank::ACE));
   hand.push_back(new Card(Card::Suit::HEART, Card::Rank::TWO));
 
+  r.sortHand(&hand);
+
   Card* c;
   
   c = hand.front();

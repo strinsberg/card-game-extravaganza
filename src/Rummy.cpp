@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 #include "Rummy.h"
 #include "RummyDeck.h"
 #include "RummyUI.h"
@@ -119,7 +120,14 @@ void Rummy::layOff(Player* p) {
 }
 
 void Rummy::sortHand(std::list<Card*>* hand) {
-
+  hand->sort([](Card* a, Card* b) {
+    if (a->suit < b->suit)
+      return true;
+    else if (a->suit == b->suit)
+        return a->rank < b->rank;
+    else
+        return false;
+  });
 }
 
 
