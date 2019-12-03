@@ -53,11 +53,33 @@ std::vector<Card*> RummyTable::takeAllCards() {
 }
 
 bool RummyTable::isSet(const std::vector<Card*>& meld) {
-  if (meld.at(0)->rank == meld.at(1)->rank)
-    return true;
-  return false;
+  Card* lastCard = meld.at(0);
+  for (unsigned int i = 1; i < meld.size(); i++) {
+    if (meld.at(i)->rank != lastCard->rank)
+      return false;
+    lastCard = meld.at(i);
+  }
+  return true;
 }
 
-bool RummyTable::validateMeld(std::vector<Card*> meld) {
+bool isRun(const std::vector<Card*> meld) {
+  Card* lastCard = meld.at(0);
+  Card::Suit suit = lastCard->suit;
+  for (unsigned int i = 1; i < meld.size(); i++) {
+    Card* c = meld.at(i);
+    if (c->rank - 1 != lastCard->rank || c->suit != suit)
+      return false;
+    lastCard = c;
+  }
   return true;
+}
+
+bool RummyTable::validateMeld(const std::vector<Card*>& meld) {
+  if (meld.size() < 3)
+    return false;
+
+  if (isSet(meld) || isRun(meld))
+    return true;
+
+  return false;
 }

@@ -49,7 +49,7 @@ class RummyTable {
    */
   virtual std::vector<Card*> takeAllCards();
 
-  virtual bool validateMeld(std::vector<Card*> meld);
+  virtual bool validateMeld(const std::vector<Card*>& meld);
 
  protected:
   std::vector<std::vector<Card*>> table;

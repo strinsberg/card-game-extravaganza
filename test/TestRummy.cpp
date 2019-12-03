@@ -38,6 +38,8 @@ TEST(RummyTests, beforeTurn) {
   Player* p = new Player("Steve");
   r.addPlayer(p);
 
+  Card* c = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+
   EXPECT_CALL(*mUI, takeTurn(p))
   .Times(1);
 
@@ -47,8 +49,28 @@ TEST(RummyTests, beforeTurn) {
   EXPECT_CALL(*mUI, displayHand(p->getHand()))
   .Times(1);
 
-  EXPECT_CALL(*mUI, playMeld(p->getHand()))
+  EXPECT_CALL(*mUI, drawFromDeck(mDeck))
+  .Times(1)
+  .WillOnce(testing::Return(0));
+
+  EXPECT_CALL(*mDeck, flipDiscard())
   .Times(1);
+
+  EXPECT_CALL(*mDeck, getCard())
+  .Times(1)
+  .WillOnce(testing::Return(c));
+
+  std::vector<int> empty;
+
+  EXPECT_CALL(*mUI, playMeld(p->getHand()))
+  .Times(1)
+  .WillOnce(testing::Return(empty));
+
+  EXPECT_CALL(*mUI, layOff(p->getHand()))
+  .Times(1)
+  .WillOnce(testing::Return(0));
+
+  r.beforeTurn(0, 1);
 }
 
 TEST(RummyTests, displayTurn) {

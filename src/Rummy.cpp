@@ -40,13 +40,13 @@ void Rummy::dealCards(std::vector<Player*> p) {
 
 void Rummy::beforeTurn(unsigned int playerNum,
                        unsigned int numPlayers) {
-//   Player* player = players(playerNum);
-//   
-//   displayTurnInfo(player);
-//   displayHand(player);
-//   pickupCard(player);
-//   playMelds(player);
-//   layOff(player);
+  Player* player = players.at(playerNum);
+  
+  displayTurnInfo(player);
+  displayHand(player);
+  pickupCard(player);
+  playMelds(player);
+  layOff(player);
 }
 
 void Rummy::displayTurnInfo(Player* p) {

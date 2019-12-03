@@ -150,3 +150,59 @@ TEST(TestRummyTable, takeAllCards) {
   for (auto & c : cards)
       delete c;
 }
+
+TEST(TestRummyTable, validateMeld_set) {
+  RummyTable rt;
+
+  Card* c1 = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  Card* c2 = new Card(Card::Suit::HEART, Card::Rank::ACE);
+  Card* c3 = new Card(Card::Suit::CLUB, Card::Rank::ACE);
+
+  std::vector<Card*> meld{c1, c2, c3};
+  EXPECT_TRUE(rt.validateMeld(meld));
+}
+
+TEST(TestRummyTable, validateMeld_run) {
+  RummyTable rt;
+
+  Card* c1 = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  Card* c2 = new Card(Card::Suit::SPADE, Card::Rank::TWO);
+  Card* c3 = new Card(Card::Suit::SPADE, Card::Rank::THREE);
+
+  std::vector<Card*> meld{c1, c2, c3};
+  EXPECT_TRUE(rt.validateMeld(meld));
+}
+
+
+TEST(TestRummyTable, validateMeld_set_throws) {
+  RummyTable rt;
+
+  Card* c1 = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  Card* c2 = new Card(Card::Suit::HEART, Card::Rank::ACE);
+  Card* c3 = new Card(Card::Suit::SPADE, Card::Rank::FOUR);
+
+  std::vector<Card*> meld{c1, c2, c3};
+  EXPECT_FALSE(rt.validateMeld(meld));
+}
+
+TEST(TestRummyTable, validateMeld_run_throws_not_in_row) {
+  RummyTable rt;
+
+  Card* c1 = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  Card* c2 = new Card(Card::Suit::SPADE, Card::Rank::TWO);
+  Card* c3 = new Card(Card::Suit::SPADE, Card::Rank::FOUR);
+
+  std::vector<Card*> meld{c1, c2, c3};
+  EXPECT_FALSE(rt.validateMeld(meld));
+}
+
+TEST(TestRummyTable, validateMeld_runs_throws_not_same_suit) {
+  RummyTable rt;
+
+  Card* c1 = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  Card* c2 = new Card(Card::Suit::SPADE, Card::Rank::TWO);
+  Card* c3 = new Card(Card::Suit::HEART, Card::Rank::THREE);
+
+  std::vector<Card*> meld{c1, c2, c3};
+  EXPECT_FALSE(rt.validateMeld(meld));
+}
