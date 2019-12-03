@@ -245,6 +245,8 @@ TEST(RummyTests, afterTurn) {
 
   std::vector<Player*> players = r.getPlayers();
   r.afterTurn(p, &players, c);
+
+  delete c;
 }
 
 TEST(RummyTests, isOver_true) {
@@ -373,29 +375,35 @@ TEST(TestRummy, sortHand) {
   hand.pop_front();
   EXPECT_EQ(Card::Suit::CLUB, c->suit);
   EXPECT_EQ(Card::Rank::KING, c->rank);
+  delete c;
 
   c = hand.front();
   hand.pop_front();
   EXPECT_EQ(Card::Suit::DIAMOND, c->suit);
   EXPECT_EQ(Card::Rank::SEVEN, c->rank);
+  delete c;
 
   c = hand.front();
   hand.pop_front();
   EXPECT_EQ(Card::Suit::SPADE, c->suit);
   EXPECT_EQ(Card::Rank::ACE, c->rank);
+  delete c;
 
   c = hand.front();
   hand.pop_front();
   EXPECT_EQ(Card::Suit::SPADE, c->suit);
   EXPECT_EQ(Card::Rank::KING, c->rank);
+  delete c;
 
   c = hand.front();
   hand.pop_front();
   EXPECT_EQ(Card::Suit::HEART, c->suit);
   EXPECT_EQ(Card::Rank::TWO, c->rank);
+  delete c;
 
   c = hand.front();
   hand.pop_front();
   EXPECT_EQ(Card::Suit::HEART, c->suit);
   EXPECT_EQ(Card::Rank::TEN, c->rank);
+  delete c;
 }

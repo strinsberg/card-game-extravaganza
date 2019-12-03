@@ -19,9 +19,6 @@ TEST(TestRummyTable, addMeld) {
 
   rt.addMeld(meld);
   EXPECT_EQ(1, rt.getMelds().size());
-
-  for (auto & c : meld)
-      delete c;
 }
 
 TEST(TestRummyTable, addCard_set) {
@@ -39,10 +36,6 @@ TEST(TestRummyTable, addCard_set) {
   rt.addMeld(meld);
   rt.addCard(c4);
   EXPECT_EQ(4, rt.getMelds().at(0).size());
-
-  for (auto & c : meld)
-      delete c;
-  delete c4;
 }
 
 TEST(TestRummyTable, addCard_run) {
@@ -62,11 +55,6 @@ TEST(TestRummyTable, addCard_run) {
   rt.addCard(c4);
   rt.addCard(c5);
   EXPECT_EQ(5, rt.getMelds().at(0).size());
-
-  for (auto & c : meld)
-      delete c;
-  delete c4;
-  delete c5;
 }
 
 TEST(TestRummyTable, addCard_throws_set) {
@@ -85,8 +73,6 @@ TEST(TestRummyTable, addCard_throws_set) {
   EXPECT_THROW(rt.addCard(c4), unmet_precondition_error);
   EXPECT_EQ(3, rt.getMelds().at(0).size());
 
-  for (auto & c : meld)
-      delete c;
   delete c4;
 }
 
@@ -108,8 +94,6 @@ TEST(TestRummyTable, addCard_throws_run) {
   EXPECT_THROW(rt.addCard(c5), unmet_precondition_error);
   EXPECT_EQ(3, rt.getMelds().at(0).size());
 
-  for (auto & c : meld)
-      delete c;
   delete c4;
   delete c5;
 }
@@ -160,6 +144,10 @@ TEST(TestRummyTable, validateMeld_set) {
 
   std::vector<Card*> meld{c1, c2, c3};
   EXPECT_TRUE(rt.validateMeld(meld));
+
+  delete c1;
+  delete c2;
+  delete c3;
 }
 
 TEST(TestRummyTable, validateMeld_run) {
@@ -171,6 +159,10 @@ TEST(TestRummyTable, validateMeld_run) {
 
   std::vector<Card*> meld{c1, c2, c3};
   EXPECT_TRUE(rt.validateMeld(meld));
+
+  delete c1;
+  delete c2;
+  delete c3;
 }
 
 
@@ -183,6 +175,10 @@ TEST(TestRummyTable, validateMeld_set_throws) {
 
   std::vector<Card*> meld{c1, c2, c3};
   EXPECT_FALSE(rt.validateMeld(meld));
+
+  delete c1;
+  delete c2;
+  delete c3;
 }
 
 TEST(TestRummyTable, validateMeld_run_throws_not_in_row) {
@@ -194,6 +190,10 @@ TEST(TestRummyTable, validateMeld_run_throws_not_in_row) {
 
   std::vector<Card*> meld{c1, c2, c3};
   EXPECT_FALSE(rt.validateMeld(meld));
+
+  delete c1;
+  delete c2;
+  delete c3;
 }
 
 TEST(TestRummyTable, validateMeld_runs_throws_not_same_suit) {
@@ -205,6 +205,10 @@ TEST(TestRummyTable, validateMeld_runs_throws_not_same_suit) {
 
   std::vector<Card*> meld{c1, c2, c3};
   EXPECT_FALSE(rt.validateMeld(meld));
+
+  delete c1;
+  delete c2;
+  delete c3;
 }
 
 TEST(TestRummyTable, validateMeld_not_long_enough) {
@@ -215,4 +219,7 @@ TEST(TestRummyTable, validateMeld_not_long_enough) {
 
   std::vector<Card*> meld{c1, c2};
   EXPECT_FALSE(rt.validateMeld(meld));
+
+  delete c1;
+  delete c2;
 }

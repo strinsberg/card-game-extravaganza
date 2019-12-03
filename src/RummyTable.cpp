@@ -5,7 +5,12 @@
 
 RummyTable::RummyTable() {}
 
-RummyTable::~RummyTable() {}
+RummyTable::~RummyTable() {
+  for (auto & v : table) {
+    for (auto & c : v)
+      delete c;
+  }
+}
 
 void RummyTable::addMeld(std::vector<Card*> meld) {
   if (validateMeld(meld))
