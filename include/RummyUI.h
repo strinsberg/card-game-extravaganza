@@ -28,6 +28,7 @@ class RummyUI : public GameUI {
   virtual int drawFromDeck(RummyDeck* deck);
   virtual std::vector<int> playMeld(std::list<Card*>* hand);
   virtual int layOff(std::list<Card*>* hand);
+  virtual void turnOver(Player* player);
 
   virtual unsigned int requestCard(Player* player,
                                    std::list<Card*>* hand);

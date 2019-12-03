@@ -14,6 +14,7 @@ void RummyUI::displayHand(std::list<Card*>* hand) {}
 int RummyUI::drawFromDeck(RummyDeck* deck) {}
 std::vector<int> RummyUI::playMeld(std::list<Card*>* hand) {}
 int RummyUI::layOff(std::list<Card*>* hand) {}
+void RummyUI::turnOver(Player* player) {}
 
 unsigned int RummyUI::requestCard(Player* player,
                                std::list<Card*>* hand) {
