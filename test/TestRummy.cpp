@@ -1,3 +1,5 @@
+#include <list>
+#include <vector>
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 #include "Rummy.h"
@@ -34,7 +36,7 @@ TEST(RummyTests, beforeTurn) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
-  
+
   Player* p = new Player("Steve");
   r.addPlayer(p);
 
@@ -77,7 +79,7 @@ TEST(RummyTests, displayTurn) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
-  
+
   Player* p = new Player("Steve");
   r.addPlayer(p);
 
@@ -94,7 +96,7 @@ TEST(RummyTests, displayHand) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
-  
+
   Player* p = new Player("Steve");
   r.addPlayer(p);
 
@@ -108,7 +110,7 @@ TEST(RummyTests, pickupCard) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
-  
+
   Player* p = new Player("Steve");
   r.addPlayer(p);
 
@@ -145,14 +147,14 @@ TEST(RummyTests, playMeld_invalid) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
-  
+
   Player* p = new Player("Steve");
   r.addPlayer(p);
   p->addCard(new Card(Card::Suit::SPADE, Card::Rank::ACE));
   p->addCard(new Card(Card::Suit::SPADE, Card::Rank::TWO));
   p->addCard(new Card(Card::Suit::SPADE, Card::Rank::KING));
 
-  std::vector<int> meldIdxs{1,2,3};
+  std::vector<int> meldIdxs{1, 2, 3};
   std::vector<int> empty;
 
   EXPECT_CALL(*mUI, playMeld(p->getHand()))
@@ -171,7 +173,7 @@ TEST(RummyTests, playMeld_valid_layoff_valid) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
-  
+
   Player* p = new Player("Steve");
   r.addPlayer(p);
   p->addCard(new Card(Card::Suit::SPADE, Card::Rank::ACE));
@@ -179,7 +181,7 @@ TEST(RummyTests, playMeld_valid_layoff_valid) {
   p->addCard(new Card(Card::Suit::SPADE, Card::Rank::THREE));
   p->addCard(new Card(Card::Suit::SPADE, Card::Rank::FOUR));
 
-  std::vector<int> meldIdxs{1,2,3};
+  std::vector<int> meldIdxs{1, 2, 3};
   std::vector<int> empty;
 
   EXPECT_CALL(*mUI, playMeld(p->getHand()))
@@ -203,7 +205,7 @@ TEST(RummyTests, layOff_invalid) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
-  
+
   Player* p = new Player("Steve");
   r.addPlayer(p);
   p->addCard(new Card(Card::Suit::SPADE, Card::Rank::ACE));
@@ -358,7 +360,7 @@ TEST(TestRummy, sortHand) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
- 
+
   std::list<Card*> hand;
   hand.push_back(new Card(Card::Suit::SPADE, Card::Rank::KING));
   hand.push_back(new Card(Card::Suit::HEART, Card::Rank::TEN));
@@ -370,7 +372,7 @@ TEST(TestRummy, sortHand) {
   r.sortHand(&hand);
 
   Card* c;
-  
+
   c = hand.front();
   hand.pop_front();
   EXPECT_EQ(Card::Suit::CLUB, c->suit);

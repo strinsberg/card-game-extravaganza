@@ -1,5 +1,5 @@
 #include <vector>
-#include <algorithm>
+#include <list>
 #include "Rummy.h"
 #include "RummyDeck.h"
 #include "RummyUI.h"
@@ -42,7 +42,7 @@ void Rummy::dealCards(std::vector<Player*> p) {
 void Rummy::beforeTurn(unsigned int playerNum,
                        unsigned int numPlayers) {
   Player* player = players.at(playerNum);
-  
+
   displayTurnInfo(player);
   displayHand(player);
   pickupCard(player);
@@ -56,23 +56,23 @@ void Rummy::displayTurnInfo(Player* p) {
 }
 
 void Rummy::displayHand(Player* p) {
- sortHand(p->getHand());
- rummyUI->displayHand(p->getHand());
+  sortHand(p->getHand());
+  rummyUI->displayHand(p->getHand());
 }
 
 void Rummy::pickupCard(Player* p) {
   int pickup = rummyUI->drawFromDeck(rummyDeck);
- 
+
   Card* c;
-  if (pickup == 1)
+  if (pickup == 1) {
     c = rummyDeck->getCard();
-  else if (pickup == 2)
+  } else if (pickup == 2) {
     c = rummyDeck->takeDiscardTop();
-  else {
+  } else {
     rummyDeck->flipDiscard();
     c = rummyDeck->getCard();
   }
- 
+
   p->addCard(c);
 }
 

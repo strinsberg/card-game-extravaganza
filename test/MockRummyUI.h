@@ -3,6 +3,7 @@
 
 #include "RummyUI.h"
 #include <list>
+#include <vector>
 
 class MockRummyUI : public RummyUI {
  public:

@@ -2,6 +2,7 @@
 #define RUMMY_CONTROLLER_H
 
 #include <vector>
+#include <list>
 #include "Game.h"
 #include "Player.h"
 #include "Card.h"

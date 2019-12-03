@@ -7,7 +7,10 @@
 
 RummyDeck::RummyDeck() : Deck() {}
 
-RummyDeck::~RummyDeck() {}
+RummyDeck::~RummyDeck() {
+  for (auto c : discard)
+    delete c;
+}
 
 Card* RummyDeck::topDiscard() {
   return discard.back();

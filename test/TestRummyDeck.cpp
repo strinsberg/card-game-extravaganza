@@ -14,8 +14,6 @@ TEST(TestRummyDeck, deck_top_discard) {
   EXPECT_EQ(Card::Rank::ACE, c->rank);
   EXPECT_EQ(Card::Suit::CLUB, c->suit);
   EXPECT_EQ(51, rd.size());
-
-  delete c;
 }
 
 
@@ -41,8 +39,6 @@ TEST(TestRummyDeck, deck_take_discard_top_empty) {
   Card *c = rd.takeDiscardTop();
 
   EXPECT_EQ(nullptr, c);
-
-  delete c;
 }
 
 
