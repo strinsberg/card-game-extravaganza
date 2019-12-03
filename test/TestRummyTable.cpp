@@ -206,3 +206,13 @@ TEST(TestRummyTable, validateMeld_runs_throws_not_same_suit) {
   std::vector<Card*> meld{c1, c2, c3};
   EXPECT_FALSE(rt.validateMeld(meld));
 }
+
+TEST(TestRummyTable, validateMeld_not_long_enough) {
+  RummyTable rt;
+
+  Card* c1 = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  Card* c2 = new Card(Card::Suit::SPADE, Card::Rank::TWO);
+
+  std::vector<Card*> meld{c1, c2};
+  EXPECT_FALSE(rt.validateMeld(meld));
+}
