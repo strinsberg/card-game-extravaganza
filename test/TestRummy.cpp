@@ -236,9 +236,9 @@ TEST(RummyTests, afterTurn) {
   Rummy r(mUI, mDeck);
 
   Player* p = new Player("Steve");
-  r.addPlayer(p);
-
   Card* c = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+  p->addCard(c);
+  r.addPlayer(p);
 
   EXPECT_CALL(*mUI, turnOver(p))
   .Times(1);
@@ -246,7 +246,7 @@ TEST(RummyTests, afterTurn) {
   std::vector<Player*> players = r.getPlayers();
   r.afterTurn(p, &players, c);
 
-  delete c;
+  EXPECT_EQ(0, p->getHand()->size());
 }
 
 TEST(RummyTests, isOver_true) {
