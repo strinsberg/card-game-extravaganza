@@ -351,3 +351,49 @@ TEST(RummyTests, dealCards_three_players) {
   EXPECT_EQ(7, p2->getHand()->size());
   EXPECT_EQ(7, p3->getHand()->size());
 }
+
+TEST(TestRummy, sortHand) {
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+ 
+  std::list<Card*> hand;
+  hand.push_back(new Card(Card::Suit::SPADE, Card::Rank::KING));
+  hand.push_back(new Card(Card::Suit::HEART, Card::Rank::TEN));
+  hand.push_back(new Card(Card::Suit::CLUB, Card::Rank::KING));
+  hand.push_back(new Card(Card::Suit::DIAMOND, Card::Rank::SEVEN));
+  hand.push_back(new Card(Card::Suit::SPADE, Card::Rank::ACE));
+  hand.push_back(new Card(Card::Suit::HEART, Card::Rank::TWO));
+
+  Card* c;
+  
+  c = hand.front();
+  hand.pop_front();
+  EXPECT_EQ(Card::Suit::CLUB, c->suit);
+  EXPECT_EQ(Card::Rank::KING, c->rank);
+
+  c = hand.front();
+  hand.pop_front();
+  EXPECT_EQ(Card::Suit::DIAMOND, c->suit);
+  EXPECT_EQ(Card::Rank::SEVEN, c->rank);
+
+  c = hand.front();
+  hand.pop_front();
+  EXPECT_EQ(Card::Suit::SPADE, c->suit);
+  EXPECT_EQ(Card::Rank::ACE, c->rank);
+
+  c = hand.front();
+  hand.pop_front();
+  EXPECT_EQ(Card::Suit::SPADE, c->suit);
+  EXPECT_EQ(Card::Rank::KING, c->rank);
+
+  c = hand.front();
+  hand.pop_front();
+  EXPECT_EQ(Card::Suit::HEART, c->suit);
+  EXPECT_EQ(Card::Rank::TWO, c->rank);
+
+  c = hand.front();
+  hand.pop_front();
+  EXPECT_EQ(Card::Suit::HEART, c->suit);
+  EXPECT_EQ(Card::Rank::TEN, c->rank);
+}
