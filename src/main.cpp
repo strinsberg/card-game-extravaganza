@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "OldMaidUI.h"
 #include "OldMaid.h"
 #include "OldMaidDeck.h"
@@ -7,13 +8,13 @@
 #include "RummyDeck.h"
 #include "RummyUI.h"
 
-const std::string players[] = {"Wendy", "John", "Barry", "Silvan"};
+const char* players[] = {"Wendy", "John", "Barry", "Silvan"};
 
 int main() {
     // Ask which game to play
     int game;
-    
-    std::cout << "Welcome to the card Game extravaganza!!!\n\n"; 
+
+    std::cout << "Welcome to the card Game extravaganza!!!\n\n";
     std::cout << "What game would you like to play?\n";
     std::cout << "1. Rummy\n2. Old Maid\n";
     std::cout << "Choice: ";
