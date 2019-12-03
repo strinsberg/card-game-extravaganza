@@ -141,7 +141,7 @@ TEST(RummyTests, pickupCard) {
   EXPECT_EQ(3, p->getHand()->size());
 }
 
-TEST(RummyTests, playMeld) {
+TEST(RummyTests, playMeld_invalid) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);
@@ -167,7 +167,39 @@ TEST(RummyTests, playMeld) {
   EXPECT_EQ(3, p->getHand()->size());
 }
 
-TEST(RummyTests, layOff) {
+TEST(RummyTests, playMeld_valid_layoff_valid) {
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+  
+  Player* p = new Player("Steve");
+  r.addPlayer(p);
+  p->addCard(new Card(Card::Suit::SPADE, Card::Rank::ACE));
+  p->addCard(new Card(Card::Suit::SPADE, Card::Rank::TWO));
+  p->addCard(new Card(Card::Suit::SPADE, Card::Rank::THREE));
+  p->addCard(new Card(Card::Suit::SPADE, Card::Rank::FOUR));
+
+  std::vector<int> meldIdxs{1,2,3};
+  std::vector<int> empty;
+
+  EXPECT_CALL(*mUI, playMeld(p->getHand()))
+  .Times(2)
+  .WillOnce(testing::Return(meldIdxs))
+  .WillOnce(testing::Return(empty));
+
+  r.playMelds(p);
+  EXPECT_EQ(1, p->getHand()->size());
+
+  EXPECT_CALL(*mUI, layOff(p->getHand()))
+  .Times(2)
+  .WillOnce(testing::Return(1))
+  .WillOnce(testing::Return(0));
+
+  r.layOff(p);
+  EXPECT_EQ(0, p->getHand()->size());
+}
+
+TEST(RummyTests, layOff_invalid) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();
   Rummy r(mUI, mDeck);

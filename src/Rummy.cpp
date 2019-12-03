@@ -104,7 +104,7 @@ void Rummy::layOff(Player* p) {
     int idx = rummyUI->layOff(p->getHand());
     if (idx > 0) {
       // get the card and check it and remove it
-      Card* card = p->getCard(idx);
+      Card* card = p->getCard(idx - 1);
       try {
         table->addCard(card);
         p->getHand()->remove(card);
