@@ -230,6 +230,23 @@ TEST(RummyTests, turnOver) {
   EXPECT_TRUE(r.turnOver());
 }
 
+TEST(RummyTests, afterTurn) {
+  MockRummyUI* mUI = new MockRummyUI();
+  MockRummyDeck* mDeck = new MockRummyDeck();
+  Rummy r(mUI, mDeck);
+
+  Player* p = new Player("Steve");
+  r.addPlayer(p);
+
+  Card* c = new Card(Card::Suit::SPADE, Card::Rank::ACE);
+
+  EXPECT_CALL(*mUI, turnOver(p))
+  .Times(1);
+
+  std::vector<Player*> players = r.getPlayers();
+  r.afterTurn(p, &players, c);
+}
+
 TEST(RummyTests, isOver_true) {
   MockRummyUI* mUI = new MockRummyUI();
   MockRummyDeck* mDeck = new MockRummyDeck();

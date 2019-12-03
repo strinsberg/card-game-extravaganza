@@ -125,6 +125,7 @@ void Rummy::sortHand(std::list<Card*>* hand) {
 
 void Rummy::afterTurn(Player* currentPlayer, std::vector<Player*>* players,
                       Card* played) {
+  rummyUI->turnOver(currentPlayer);
 }
 
 bool Rummy::turnOver() {
