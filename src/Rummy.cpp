@@ -65,6 +65,7 @@ void Rummy::pickupCard(Player* p) {
 
   Card* c;
   if (pickup == 1) {
+    // This should do a different thing if the deck is empty
     c = rummyDeck->getCard();
   } else if (pickup == 2) {
     c = rummyDeck->takeDiscardTop();
@@ -134,8 +135,11 @@ void Rummy::sortHand(std::list<Card*>* hand) {
 void Rummy::afterTurn(Player* currentPlayer, std::vector<Player*>* players,
                       Card* played) {
   rummyUI->turnOver(currentPlayer);
-  rummyDeck->addDiscard(played);
-  currentPlayer->getHand()->remove(played);
+
+  if (played != nullptr) {
+    rummyDeck->addDiscard(played);
+    currentPlayer->getHand()->remove(played);
+  }
 }
 
 bool Rummy::turnOver() {
