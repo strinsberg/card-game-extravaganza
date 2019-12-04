@@ -16,9 +16,13 @@ void RummyUI::takeTurn(Player* p) {
 
 void RummyUI::displayTable(RummyTable* table) {
   std::cout << "--- The Table ---" << std::endl;
+  if (table->getMelds().size()) {
   for (auto & v : table->getMelds()) {
     for (auto c : v)
       std::cout << c << " ";
+  }
+  } else {
+    std::cout << "Empty" << std::endl;
   }
   std::cout << std::endl;
 }
@@ -26,7 +30,7 @@ void RummyUI::displayTable(RummyTable* table) {
 void RummyUI::displayHand(std::list<Card*>* hand) {
   std::cout << "-- Your Hand:" << std::endl;
   for (auto it = hand->begin(); it != hand->end(); it++)
-      std::cout << *it << " ";
+      std::cout << *(*it) << " ";
   std::cout << std::endl << std::endl;
 }
 
@@ -37,6 +41,7 @@ int RummyUI::drawFromDeck(RummyDeck* deck) {
   std::cout << "Choice? ";
 
   std::cin >> ans;
+  std::cout << std::endl;
   return ans;
 }
 
@@ -52,7 +57,9 @@ std::vector<int> RummyUI::playMeld(std::list<Card*>* hand) {
         break;
     }
     idxs.push_back(i);
+    std::cout << i << std::endl; 
   }
+  std::cout << std::endl;
   return idxs;
 }
 
@@ -65,8 +72,10 @@ int RummyUI::layOff(std::list<Card*>* hand) {
 
     int i;
     std::cin >> i;
-    if (i >= 0 && i <= hand->size())
+    if (i >= 0 && i <= hand->size()) {
+      std::cout << std::endl;
       return i;
+    }
   }
 }
 
@@ -82,21 +91,23 @@ unsigned int RummyUI::requestCard(Player* player,
     return 42;
 
   while (1) {
-    std::cout << "Please choose a card to discard: " << std::endl;
+    std::cout << "Please choose a card to discard: ";
 
     int i;
     std::cin >> i;
-    if (i > 0 && i <= hand->size())
+    if (i > 0 && i <= hand->size()) {
+      std::cout << std::endl;
       return i - 1;
+    }
   }
 }
 
 void RummyUI::playFailed() {
-  std::cout << "Sorry that play was invalid!" << std::endl;
+  std::cout << "Sorry that play was invalid!" << std::endl << std::endl;
 }
 
 void RummyUI::playSucceeded() {
-  std::cout << "Well played!" << std::endl;
+  std::cout << "Well played!" << std::endl << std::endl;;
 }
 
 void RummyUI::showGameOutcome(std::vector<Player*> players) {

@@ -44,12 +44,14 @@ int main() {
     std::string name;
     std::cout << "What is your name (one word)? ";
     std::cin >> name;
+    std::cout << std::endl;
 
     int playerNum = 1;
-    while (playerNum < 4 && playerNum > 0) {
+    while (playerNum > 3 && playerNum < 1) {
       std::cout << "\nHow many opponents (1-3)? ";
       std::cin >> playerNum;
     }
+    std::cout << std::endl;
 
     g->addPlayer(new Player(name));
     for (int i = 0; i < playerNum; i++)
