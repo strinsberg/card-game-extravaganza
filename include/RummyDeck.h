@@ -62,6 +62,8 @@ class RummyDeck : public Deck {
    */
   virtual void discardDeckTop();
 
+  virtual Card*  deckTop() {return deck.front();}
+
  protected:
   std::vector<Card*> discard;
 };

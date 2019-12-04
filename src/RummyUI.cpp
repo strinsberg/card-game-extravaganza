@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
+#include <sstream>
 #include "RummyUI.h"
 #include "Player.h"
 #include "Card.h"
@@ -17,10 +18,11 @@ void RummyUI::takeTurn(Player* p) {
 void RummyUI::displayTable(RummyTable* table) {
   std::cout << "--- The Table ---" << std::endl;
   if (table->getMelds().size()) {
-  for (auto & v : table->getMelds()) {
-    for (auto c : v)
-      std::cout << c << " ";
-  }
+    for (auto & v : table->getMelds()) {
+      for (auto c : v)
+        std::cout << *c << " ";
+      std::cout << std::endl;
+    }
   } else {
     std::cout << "Empty" << std::endl;
   }
@@ -28,7 +30,7 @@ void RummyUI::displayTable(RummyTable* table) {
 }
 
 void RummyUI::displayHand(std::list<Card*>* hand) {
-  std::cout << "-- Your Hand:" << std::endl;
+  std::cout << "-- Your Hand (size = " << hand->size() << "):" << std::endl;
   for (auto it = hand->begin(); it != hand->end(); it++)
       std::cout << *(*it) << " ";
   std::cout << std::endl << std::endl;
@@ -37,12 +39,33 @@ void RummyUI::displayHand(std::list<Card*>* hand) {
 int RummyUI::drawFromDeck(RummyDeck* deck) {
   int ans = 0;
   std::cout << "Draw from the deck or the discard?" << std::endl;
-  std::cout << "1. Deck" << std::endl << "2. Discard" << std::endl;
-  std::cout << "Choice? ";
+  std::cout << "1. Deck(" << deck->size() << ")" << std::endl;
+  std:: cout << "2. Discard -> ";
 
-  std::cin >> ans;
-  std::cout << std::endl;
-  return ans;
+  bool empty = deck->discardSize() == 0;
+  if (!empty)
+    std::cout << *(deck->topDiscard()) << std::endl;
+  else
+    std::cout << "Empty" << std::endl;
+
+  int upper = empty ? 2 : 3;
+  while (1) {
+    std::cout << "Choice? ";
+
+    std::cin >> ans;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore();
+        continue;
+    }
+
+    if (ans > 0 && ans < upper) {
+      if (ans == 1)
+        std::cout << "\n** You pickup: " << *(deck->deckTop()) << std::endl;
+      std::cout << std::endl;
+      return ans;
+    }
+  }
 }
 
 std::vector<int> RummyUI::playMeld(std::list<Card*>* hand) {
@@ -51,13 +74,17 @@ std::vector<int> RummyUI::playMeld(std::list<Card*>* hand) {
   
   std::vector<int> idxs;
   int i;
-  while (std::cin >> i) {
+  std::string in;
+  std::cin.ignore();
+  std::getline (std::cin, in);
+
+  std::stringstream ss(in);
+  while (ss >> i) {
     if (i == 0) {
         idxs.clear();
         break;
     }
     idxs.push_back(i);
-    std::cout << i << std::endl; 
   }
   std::cout << std::endl;
   return idxs;
@@ -72,6 +99,12 @@ int RummyUI::layOff(std::list<Card*>* hand) {
 
     int i;
     std::cin >> i;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore();
+        continue;
+    }
+
     if (i >= 0 && i <= hand->size()) {
       std::cout << std::endl;
       return i;
@@ -81,7 +114,11 @@ int RummyUI::layOff(std::list<Card*>* hand) {
 
 void RummyUI::turnOver(Player* player) {
   std::cout << "** Your turn is over **" << std::endl;
-  // maybe pause if you can figure it out again
+  std::cout << "Press ENTER To Continue ...";
+  std::cout << std::endl;
+  std::string in;
+  std::cin.ignore();
+  std::getline(std::cin, in);
 }
 
 
@@ -95,6 +132,12 @@ unsigned int RummyUI::requestCard(Player* player,
 
     int i;
     std::cin >> i;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore();
+        continue;
+    }
+
     if (i > 0 && i <= hand->size()) {
       std::cout << std::endl;
       return i - 1;

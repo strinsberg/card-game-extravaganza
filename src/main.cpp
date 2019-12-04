@@ -20,6 +20,11 @@ int main() {
     std::cout << "Choice: ";
 
     std::cin >> game;
+    if (std::cin.fail()) {
+      std::cout << "Not a valid Choice!!\nBetter luck next time!\n";
+      return 0;
+    }
+    std::cout << std::endl;
 
     // Build game objects
     Game* g;
@@ -46,10 +51,15 @@ int main() {
     std::cin >> name;
     std::cout << std::endl;
 
-    int playerNum = 1;
-    while (playerNum > 3 && playerNum < 1) {
-      std::cout << "\nHow many opponents (1-3)? ";
+    int playerNum = 10;
+    while (playerNum > 3 || playerNum < 0) {
+      std::cout << "How many opponents (1-3)? ";
       std::cin >> playerNum;
+      if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore();
+        continue;
+      }
     }
     std::cout << std::endl;
 

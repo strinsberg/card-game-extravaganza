@@ -44,8 +44,8 @@ void Rummy::beforeTurn(unsigned int playerNum,
   Player* player = players.at(playerNum);
 
   displayTurnInfo(player);
-  displayHand(player);
   pickupCard(player);
+  displayHand(player);
   playMelds(player);
   layOff(player);
 }
@@ -91,6 +91,8 @@ void Rummy::playMelds(Player* p) {
         for (auto c : meld)
           p->getHand()->remove(c);
         // redisplay hand? table? say play succeeded?
+        rummyUI->playSucceeded();
+        displayHand(p);
       } catch (unmet_precondition_error & e) {
         rummyUI->playFailed();
       }
@@ -111,6 +113,8 @@ void Rummy::layOff(Player* p) {
         table->addCard(card);
         p->getHand()->remove(card);
         // say anything??
+        rummyUI->playSucceeded();
+        displayHand(p);
       } catch (unmet_precondition_error& e) {
         rummyUI->playFailed();
       }
