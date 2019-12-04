@@ -44,8 +44,8 @@ void Rummy::beforeTurn(unsigned int playerNum,
   Player* player = players.at(playerNum);
 
   displayTurnInfo(player);
-  pickupCard(player);
   displayHand(player);
+  pickupCard(player);
   playMelds(player);
   layOff(player);
 }
@@ -75,6 +75,7 @@ void Rummy::pickupCard(Player* p) {
   }
 
   p->addCard(c);
+  displayHand(p);
 }
 
 void Rummy::playMelds(Player* p) {
@@ -92,6 +93,7 @@ void Rummy::playMelds(Player* p) {
           p->getHand()->remove(c);
         // redisplay hand? table? say play succeeded?
         rummyUI->playSucceeded();
+        rummyUI->displayTable(table);
         displayHand(p);
       } catch (unmet_precondition_error & e) {
         rummyUI->playFailed();
@@ -103,6 +105,7 @@ void Rummy::playMelds(Player* p) {
 }
 
 void Rummy::layOff(Player* p) {
+  rummyUI->displayTable(table);
   bool layoff = true;
   while (layoff) {
     int idx = rummyUI->layOff(p->getHand());
@@ -114,6 +117,7 @@ void Rummy::layOff(Player* p) {
         p->getHand()->remove(card);
         // say anything??
         rummyUI->playSucceeded();
+        rummyUI->displayTable(table);
         displayHand(p);
       } catch (unmet_precondition_error& e) {
         rummyUI->playFailed();
@@ -143,6 +147,11 @@ void Rummy::afterTurn(Player* currentPlayer, std::vector<Player*>* players,
   if (played != nullptr) {
     rummyDeck->addDiscard(played);
     currentPlayer->getHand()->remove(played);
+  }
+
+  for (auto p : *players) {
+    int points = countPoints(p);
+    p->setScore(points);
   }
 }
 

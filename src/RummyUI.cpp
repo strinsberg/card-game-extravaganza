@@ -127,8 +127,9 @@ unsigned int RummyUI::requestCard(Player* player,
   if (!hand->size())
     return 42;
 
+  displayHand(hand);
   while (1) {
-    std::cout << "Please choose a card to discard: ";
+    std::cout << "Position of card to discard: ";
 
     int i;
     std::cin >> i;
