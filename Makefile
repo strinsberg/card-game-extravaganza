@@ -59,6 +59,7 @@ memcheck-game: $(PROGRAM)
 memcheck-test: $(PROGRAM_TEST)
 	valgrind --tool=memcheck --leak-check=yes $(PROGRAM_TEST)
 
+.PHONY: coverage
 coverage: $(PROGRAM_TEST)
 	$(LCOV) --capture --gcov-tool $(GCOV) --directory . --output-file $(COVERAGE_RESULTS)
 	$(LCOV) --extract $(COVERAGE_RESULTS) "*/Destroy/src/*" -o $(COVERAGE_RESULTS)
@@ -71,5 +72,6 @@ static: ${SRC_DIR}
 style: ${TEST_DIR} ${SRC_INCLUDE} ${SRC_DIR}
 	${STYLE_CHECK} $(SRC_INCLUDE)/* ${TEST_DIR}/* ${SRC_DIR}/*
 
-docs:
-	doxygen -f docs/doxyfile
+.PHONY: docs
+docs: ${SRC_INCLUDE}
+	doxygen docs/doxyfile
