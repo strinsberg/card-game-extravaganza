@@ -37,6 +37,8 @@ void Rummy::dealCards(std::vector<Player*> p) {
         p->addCard(deck->getCard());
         playerNum = (++playerNum) % numPlayers;
     }
+    
+    rummyDeck->discardDeckTop();
 }
 
 void Rummy::beforeTurn(unsigned int playerNum,
@@ -105,8 +107,12 @@ void Rummy::playMelds(Player* p) {
 }
 
 void Rummy::layOff(Player* p) {
+  if (p->getHand()->size() == 0 || table->getMelds().size() == 0)
+    return;
+
   rummyUI->displayTable(table);
   bool layoff = true;
+  
   while (layoff) {
     int idx = rummyUI->layOff(p->getHand());
     if (idx > 0) {
