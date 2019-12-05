@@ -45,11 +45,14 @@ TEST(RummyTests, beforeTurn) {
   EXPECT_CALL(*mUI, takeTurn(p))
   .Times(1);
 
+  EXPECT_CALL(*mUI, pickedCard(c))
+  .Times(1);
+
   EXPECT_CALL(*mUI, displayTable(testing::_))
   .Times(1);
 
   EXPECT_CALL(*mUI, displayHand(p->getHand()))
-  .Times(1);
+  .Times(2);
 
   EXPECT_CALL(*mUI, drawFromDeck(mDeck))
   .Times(1)
@@ -67,10 +70,6 @@ TEST(RummyTests, beforeTurn) {
   EXPECT_CALL(*mUI, playMeld(p->getHand()))
   .Times(1)
   .WillOnce(testing::Return(empty));
-
-  EXPECT_CALL(*mUI, layOff(p->getHand()))
-  .Times(1)
-  .WillOnce(testing::Return(0));
 
   r.beforeTurn(0, 1);
 }
@@ -123,6 +122,12 @@ TEST(RummyTests, pickupCard) {
   .WillOnce(testing::Return(1))
   .WillOnce(testing::Return(2))
   .WillOnce(testing::Return(0));
+
+  EXPECT_CALL(*mUI, pickedCard(testing::_))
+  .Times(3);
+
+  EXPECT_CALL(*mUI, displayHand(p->getHand()))
+  .Times(3);
 
   EXPECT_CALL(*mDeck, getCard())
   .Times(2)
@@ -189,6 +194,15 @@ TEST(RummyTests, playMeld_valid_layoff_valid) {
   .WillOnce(testing::Return(meldIdxs))
   .WillOnce(testing::Return(empty));
 
+  EXPECT_CALL(*mUI, displayHand(p->getHand()))
+  .Times(2);
+
+  EXPECT_CALL(*mUI, displayTable(testing::_))
+  .Times(3);
+
+  EXPECT_CALL(*mUI, playSucceeded())
+  .Times(2);
+
   r.playMelds(p);
   EXPECT_EQ(1, p->getHand()->size());
 
@@ -212,12 +226,18 @@ TEST(RummyTests, layOff_invalid) {
   p->addCard(new Card(Card::Suit::SPADE, Card::Rank::TWO));
   p->addCard(new Card(Card::Suit::SPADE, Card::Rank::KING));
 
+  r.getTable()->getMelds().push_back(
+      std::vector<Card*>{new Card(Card::Suit::SPADE, Card::Rank::SEVEN)});
+
   EXPECT_CALL(*mUI, layOff(p->getHand()))
   .Times(2)
   .WillOnce(testing::Return(1))
   .WillOnce(testing::Return(0));
 
   EXPECT_CALL(*mUI, playFailed())
+  .Times(1);
+
+  EXPECT_CALL(*mUI, displayTable(testing::_))
   .Times(1);
 
   r.layOff(p);
@@ -243,6 +263,9 @@ TEST(RummyTests, afterTurn) {
   r.addPlayer(p);
 
   EXPECT_CALL(*mUI, turnOver(p))
+  .Times(1);
+
+  EXPECT_CALL(*mDeck, addDiscard(c))
   .Times(1);
 
   std::vector<Player*> players = r.getPlayers();
@@ -310,6 +333,9 @@ TEST(RummyTests, dealCards_two_players) {
   .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::QUEEN)))
   .WillOnce(testing::Return(new Card(Card::Suit::CLUB, Card::Rank::KING)));
 
+  EXPECT_CALL(*mDeck, discardDeckTop())
+  .Times(1);
+
   r.dealCards(r.getPlayers());
   EXPECT_EQ(10, p->getHand()->size());
   EXPECT_EQ(10, p2->getHand()->size());
@@ -351,6 +377,9 @@ TEST(RummyTests, dealCards_three_players) {
   .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::JACK)))
   .WillOnce(testing::Return(new Card(Card::Suit::HEART, Card::Rank::QUEEN)))
   .WillOnce(testing::Return(new Card(Card::Suit::CLUB, Card::Rank::KING)));
+
+  EXPECT_CALL(*mDeck, discardDeckTop())
+  .Times(1);
 
   r.dealCards(r.getPlayers());
   EXPECT_EQ(7, p->getHand()->size());

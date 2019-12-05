@@ -77,6 +77,7 @@ void Rummy::pickupCard(Player* p) {
   }
 
   p->addCard(c);
+  rummyUI->pickedCard(c);
   displayHand(p);
 }
 

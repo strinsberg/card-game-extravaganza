@@ -42,7 +42,7 @@ void RummyTable::addCard(Card* c) {
   throw unmet_precondition_error("That card cannot be added to any melds");
 }
 
-const std::vector<std::vector<Card*>>& RummyTable::getMelds() {
+std::vector<std::vector<Card*>>& RummyTable::getMelds() {
   return table;
 }
 

@@ -40,7 +40,7 @@ class RummyTable {
    *
    * @return A vector of melds.
    */
-  virtual const std::vector<std::vector<Card*>>& getMelds();
+  virtual std::vector<std::vector<Card*>>& getMelds();
 
   /**
    * Returns a vector with all the cards and removes them from the table.

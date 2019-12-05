@@ -61,6 +61,7 @@ int RummyUI::drawFromDeck(RummyDeck* deck) {
         continue;
     }
 
+    std::cout << std::endl;
     if (choice > 2 || choice < 1) {
       continue;
     } else if (choice == 1 && empty) {
@@ -69,6 +70,10 @@ int RummyUI::drawFromDeck(RummyDeck* deck) {
       return choice;
     }
   }
+}
+
+void RummyUI::pickedCard(Card* c) {
+  std::cout << "*** You Picked up " << *c <<" ***" << std::endl << std::endl;
 }
 
 std::vector<int> RummyUI::playMeld(std::list<Card*>* hand) {

@@ -41,6 +41,7 @@ class Rummy : public Game {
   virtual void pickupCard(Player* p);
   virtual void playMelds(Player* p);
   virtual void layOff(Player* p);
+  virtual RummyTable* getTable() {return table;}
 
   void sortHand(std::list<Card*>* hand);
 
