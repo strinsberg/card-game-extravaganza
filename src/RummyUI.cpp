@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <list>
 #include <vector>
 #include <sstream>
@@ -79,12 +80,12 @@ void RummyUI::pickedCard(Card* c) {
 std::vector<int> RummyUI::playMeld(std::list<Card*>* hand) {
   std::cout << "-- Play Melds --" << std::endl;
   std::cout << "Enter the positions of the cards (0 to skip): " << std::endl;
-  
+
   std::vector<int> idxs;
   int i;
   std::string in;
   std::cin.ignore();
-  std::getline (std::cin, in);
+  std::getline(std::cin, in);
 
   std::stringstream ss(in);
   while (ss >> i) {
@@ -100,10 +101,10 @@ std::vector<int> RummyUI::playMeld(std::list<Card*>* hand) {
 
 int RummyUI::layOff(std::list<Card*>* hand) {
   std::cout << "-- LayOff --" << std::endl;
-  std::cout << "Will be added to first available meld! (0 to skip)" << std::endl;
+  std::cout << "Will be added to first available meld!(0 to skip)" << std::endl;
 
   while (1) {
-    std::cout << "Enter the position of a card to place on table: " << std::endl;
+    std::cout << "Enter the position of card to place on table: " << std::endl;
 
     int i;
     std::cin >> i;

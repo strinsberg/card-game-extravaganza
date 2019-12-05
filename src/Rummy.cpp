@@ -37,7 +37,7 @@ void Rummy::dealCards(std::vector<Player*> p) {
         p->addCard(deck->getCard());
         playerNum = (++playerNum) % numPlayers;
     }
-    
+
     rummyDeck->discardDeckTop();
 }
 
@@ -95,7 +95,7 @@ void Rummy::playMelds(Player* p) {
         table->addMeld(meld);
         for (auto c : meld)
           p->getHand()->remove(c);
-  
+
         rummyUI->playSucceeded();
         rummyUI->displayTable(table);
         displayHand(p);
@@ -114,7 +114,7 @@ void Rummy::layOff(Player* p) {
 
   rummyUI->displayTable(table);
   bool layoff = true;
-  
+
   while (layoff) {
     int idx = rummyUI->layOff(p->getHand());
     if (idx > 0) {
