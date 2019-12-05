@@ -63,7 +63,7 @@ class Rummy : public Game {
    * @param p The player taking the turn.
    */
   virtual void playMelds(Player* p);
-  
+
   /**
    * Part of the turn where the player can layoff cards.
    *
