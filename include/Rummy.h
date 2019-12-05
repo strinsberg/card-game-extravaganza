@@ -36,13 +36,51 @@ class Rummy : public Game {
    */
   virtual int countPoints(Player*);
 
+  /**
+   * Part of the turn where turn info is displayed.
+   *
+   * @param p The player taking the turn.
+   */
   virtual void displayTurnInfo(Player* p);
+
+  /**
+   * Sort and display the players hand.
+   *
+   * @param p The player taking the turn.
+   */
   virtual void displayHand(Player* p);
+
+  /**
+   * Part of the turn where the player picks up a card.
+   *
+   * @param p The player taking the turn.
+   */
   virtual void pickupCard(Player* p);
+
+  /**
+   * The part of the turn where the player can play melds.
+   *
+   * @param p The player taking the turn.
+   */
   virtual void playMelds(Player* p);
+  
+  /**
+   * Part of the turn where the player can layoff cards.
+   *
+   * @param p The player taking the turn.
+   */
   virtual void layOff(Player* p);
+
+  /**
+   * @return the rummy table where melds are kept.
+   */
   virtual RummyTable* getTable() {return table;}
 
+  /**
+   * Sort a hand by suit and value.
+   *
+   * @param hand The hand to sort.
+   */
   void sortHand(std::list<Card*>* hand);
 
   virtual void dealCards(std::vector<Player*> p);

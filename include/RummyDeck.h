@@ -62,6 +62,12 @@ class RummyDeck : public Deck {
    */
   virtual void discardDeckTop();
 
+  /**
+   *  Return the card on the top of the deck.
+   *  Does not remove the card.
+   *
+   *  @return the top card of the deck.
+   */
   virtual Card*  deckTop() {return deck.front();}
 
  protected:

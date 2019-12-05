@@ -49,6 +49,11 @@ class RummyTable {
    */
   virtual std::vector<Card*> takeAllCards();
 
+  /**
+   * Ensure that a meld is a valid set or a run.
+   *
+   * @return true if the meld is valid, otherwise false.
+   */
   virtual bool validateMeld(const std::vector<Card*>& meld);
 
  protected:
