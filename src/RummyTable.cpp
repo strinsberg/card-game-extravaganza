@@ -67,7 +67,7 @@ bool RummyTable::isSet(const std::vector<Card*>& meld) {
   return true;
 }
 
-bool isRun(const std::vector<Card*> meld) {
+bool isRun(const std::vector<Card*>& meld) {
   Card* lastCard = meld.at(0);
   Card::Suit suit = lastCard->suit;
   for (unsigned int i = 1; i < meld.size(); i++) {
