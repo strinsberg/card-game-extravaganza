@@ -86,6 +86,7 @@ void Rummy::playMelds(Player* p) {
     std::vector<int> meldIdxs = rummyUI->playMeld(p->getHand());
     if (meldIdxs.size()) {
       std::vector<Card*> meld;
+
       // validate set or run before removeing cards
       for (auto i : meldIdxs)
         meld.push_back(p->getCard(i - 1));
@@ -93,7 +94,7 @@ void Rummy::playMelds(Player* p) {
         table->addMeld(meld);
         for (auto c : meld)
           p->getHand()->remove(c);
-        // redisplay hand? table? say play succeeded?
+  
         rummyUI->playSucceeded();
         rummyUI->displayTable(table);
         displayHand(p);
@@ -121,6 +122,7 @@ void Rummy::layOff(Player* p) {
       try {
         table->addCard(card);
         p->getHand()->remove(card);
+
         // say anything??
         rummyUI->playSucceeded();
         rummyUI->displayTable(table);

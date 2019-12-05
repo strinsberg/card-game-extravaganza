@@ -37,33 +37,36 @@ void RummyUI::displayHand(std::list<Card*>* hand) {
 }
 
 int RummyUI::drawFromDeck(RummyDeck* deck) {
-  int ans = 0;
-  std::cout << "Draw from the deck or the discard?" << std::endl;
-  std::cout << "1. Deck(" << deck->size() << ")" << std::endl;
+  int choice = 0;
+  bool empty = deck->size() == 0;
+
+  if (!empty) {
+    std::cout << "Draw from the deck or the discard?" << std::endl;
+    std::cout << "1. Deck(" << deck->size() << ")" << std::endl;
+  } else {
+    std::cout << "Draw from the deck or the discard?" << std::endl;
+    std::cout << "1. Flip over discard and take card" << std::endl;
+  }
+
   std:: cout << "2. Discard -> ";
+  std::cout << *(deck->topDiscard()) << std::endl;
 
-  bool empty = deck->discardSize() == 0;
-  if (!empty)
-    std::cout << *(deck->topDiscard()) << std::endl;
-  else
-    std::cout << "Empty" << std::endl;
-
-  int upper = empty ? 2 : 3;
   while (1) {
     std::cout << "Choice? ";
 
-    std::cin >> ans;
+    std::cin >> choice;
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore();
         continue;
     }
 
-    if (ans > 0 && ans < upper) {
-      if (ans == 1)
-        std::cout << "\n** You pickup: " << *(deck->deckTop()) << std::endl;
-      std::cout << std::endl;
-      return ans;
+    if (choice > 2 || choice < 1) {
+      continue;
+    } else if (choice == 1 && empty) {
+      return 3;  // flip discard
+    } else {
+      return choice;
     }
   }
 }
