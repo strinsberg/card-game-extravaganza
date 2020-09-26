@@ -1,6 +1,8 @@
-# Card Game Extravaganza
+# Card Game Extravaganza - CPSC 3720 Software Extension Assignment (fall 2019)
 
 A collection of 2 whole command line card games!
+
+The professor provided code for the Old Maid card game and We were tasked with extending this code to add the game Rummy and to allow the user to play both.
 
 # How to play Rummy
 1. Start the extravaganza
@@ -18,4 +20,4 @@ A collection of 2 whole command line card games!
 The winner is the player who gets rid of all their cards first. The other players will have their remaingin cards counted against them. Players remaining cards are totalled and counted against them. This would ideally be done so that more rounds could be played and point totals accumulate, but this is not possible for now.
 
 # Acknowledgements
-* The code in Rummy was written using the existing code for Old Maid. This game would have taken longer to make if it were not for the pretty good code provided.
+* The code in Rummy was written using the existing code for Old Maid (provided by the professor). This game would have taken longer to make if it were not for the pretty good code provided.
